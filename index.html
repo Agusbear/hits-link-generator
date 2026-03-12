@@ -37,7 +37,10 @@
     <py-script>
 from pyscript import Element
 
-def generate_link(event=None):
+def generate_link(url):
+    return f"[{url}]({url})"
+
+def generate(event=None):
     url = Element("url-input").value.strip()
     output = Element("output")
 
@@ -45,11 +48,14 @@ def generate_link(event=None):
         output.write("Please enter a URL.")
         return
 
-    result = f"[{url}]({url})"
+    result = generate_link(url)
     output.write(result)
 
-# Bind button click
-Element("generate-btn").element.onclick = generate_link
+    # Copy to clipboard using JS
+    from js import navigator
+    navigator.clipboard.writeText(result)
+
+Element("generate-btn").element.onclick = generate
     </py-script>
 </body>
 </html>
