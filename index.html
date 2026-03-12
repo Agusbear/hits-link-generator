@@ -1,46 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hits Link Generator (PyScript)</title>
+    <title>Hits Link Generator</title>
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        input, button {
-            padding: 10px;
-            font-size: 1rem;
-        }
-        #output {
-            margin-top: 20px;
-            padding: 10px;
-            background: #f3f3f3;
-            border-radius: 6px;
-            white-space: pre-wrap;
-        }
-    </style>
 </head>
 
 <body>
     <h1>Hits Link Generator</h1>
 
-    <input id="url-input" placeholder="Enter URL" style="width: 80%">
+    <input id="url-input" placeholder="Enter URL" style="width: 70%">
     <button id="generate-btn">Generate</button>
 
-    <div id="output"></div>
+    <pre id="output"></pre>
 
     <py-script>
 from pyscript import Element
 
-def generate_link(url):
-    return f"[{url}]({url})"
-
-def generate(event=None):
+def generate_link(event=None):
     url = Element("url-input").value.strip()
     output = Element("output")
 
@@ -48,14 +25,11 @@ def generate(event=None):
         output.write("Please enter a URL.")
         return
 
-    result = generate_link(url)
+    result = f"[{url}]({url})"
     output.write(result)
 
-    # Copy to clipboard using JS
-    from js import navigator
-    navigator.clipboard.writeText(result)
-
-Element("generate-btn").element.onclick = generate
+# Bind button click
+Element("generate-btn").element.onclick = generate_link
     </py-script>
 </body>
 </html>
