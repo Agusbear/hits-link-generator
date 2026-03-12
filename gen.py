@@ -2,8 +2,10 @@
 <html>
 <head>
     <title>Hits Link Generator</title>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <!-- Updated PyScript CDN -->
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
 
     <style>
         body {
@@ -57,7 +59,6 @@ def run_generator(event=None):
     # Copy to clipboard
     navigator.clipboard.writeText(result)
 
-# Bind button click
 Element("generate-btn").element.onclick = run_generator
     </py-script>
 </body>
